@@ -7,8 +7,8 @@ import {
   Dimensions,
   Text,
   Pressable,
+  SafeAreaView
 } from 'react-native';
-import SafeAreaView from 'react-native-safe-area-view';
 import COLORS from '../../consts/colors';
 
 const deviceWidth = Dimensions.get('window').width;
