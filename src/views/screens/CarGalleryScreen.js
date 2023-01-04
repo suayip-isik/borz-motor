@@ -41,8 +41,81 @@ const CarGalleryScreen = ({ }) => {
 
   const filteredCars = cars.filter(x => x.published);
 
-  const Card = () => {
-    return <View style={style.card}></View>;
+  const Card = ({ item, index }) => {
+    console.log(item._id);
+    return (
+      <View style={style.card} key={item._id + 'w'}>
+        {item.images.map(
+          (img, i) =>
+            item.images[i].case === 0 && (
+              <Pressable
+                key={i}
+                onPress={() =>
+                  navigation.navigate('CarDetailScreen', {
+                    primaryImage: item.images[i].name,
+                    itemId: item._id,
+                    itemBrand: item.brand,
+                    itemModel: item.model,
+                    itemKM: item.kilometers,
+                    itemFuel: item.fuel,
+                    itemPrice: item.price,
+                    itemYear: item.year,
+                    itemMotor: item.motor,
+                    itemColor: item.color,
+                    itemIntro: item.intro,
+                    itemGear: item.gear,
+                    itemBox: item.box,
+                    itemDate: item.date,
+                    itemTramer: item.tramer,
+                    itemResponsible: item.responsible,
+                    itemResponsiblePhone: item.responsiblePhone,
+                  })
+                }>
+                <Image
+                  key={item.images[i].name}
+                  source={{
+                    uri:
+                      'https:test.borzmotor.com/' +
+                      item.images[i].name,
+                  }}
+                  style={style.cardImage}
+                />
+              </Pressable>
+            ),
+        )}
+
+        <View style={style.cardDetailRow}>
+          <Text style={style.carBrand}>
+            {item.brand + ' - ' + item.model}
+          </Text>
+          <View></View>
+        </View>
+
+        <View style={style.cardDetailRow}>
+          <Text>Satış Fiyatı</Text>
+          <View></View>
+        </View>
+        <View style={style.cardDetailRow}>
+          <Text style={style.carPrice}>{item.price + ' ₺'}</Text>
+          <View></View>
+        </View>
+        <View style={style.introWrapper}>
+          <Text style={{ fontSize: 14 }}>{item.intro}</Text>
+        </View>
+        <View style={style.detailButtons}>
+          <View style={style.innerTexts}>
+            <Text>{item.kilometers + ' KM'}</Text>
+          </View>
+          <View style={style.innerTexts}>
+            <Text>{item.fuel}</Text>
+          </View>
+          <View style={style.innerTexts}>
+            <Text>{item.gear}</Text>
+          </View>
+        </View>
+
+      </View>
+    );
   };
 
   const ListCategories = () => {
@@ -152,79 +225,7 @@ const CarGalleryScreen = ({ }) => {
             data={filteredCars}
             numColumns={column}
             keyExtractor={item => item._id}
-            renderItem={({ item, index }) => (
-              <View style={style.card} key={item._id + 'w'}>
-                {item.images.map(
-                  (img, i) =>
-                    item.images[i].case === 0 && (
-                      <Pressable
-                        key={item._id + 'p'}
-                        onPress={() =>
-                          navigation.navigate('CarDetailScreen', {
-                            primaryImage: item.images[i].name,
-                            itemId: item._id,
-                            itemBrand: item.brand,
-                            itemModel: item.model,
-                            itemKM: item.kilometers,
-                            itemFuel: item.fuel,
-                            itemPrice: item.price,
-                            itemYear: item.year,
-                            itemMotor: item.motor,
-                            itemColor: item.color,
-                            itemIntro: item.intro,
-                            itemGear: item.gear,
-                            itemBox: item.box,
-                            itemDate: item.date,
-                            itemTramer: item.tramer,
-                            itemResponsible: item.responsible,
-                            itemResponsiblePhone: item.responsiblePhone,
-                          })
-                        }>
-                        <Image
-                          key={item.images[i].name}
-                          source={{
-                            uri:
-                              'https://test.borzmotor.com/' +
-                              item.images[i].name,
-                          }}
-                          style={style.cardImage}
-                        />
-                      </Pressable>
-                    ),
-                )}
-
-                <View style={style.cardDetailRow}>
-                  <Text style={style.carBrand}>
-                    {item.brand.toUpperCase() +
-                      ' - ' +
-                      item.model.toUpperCase()}
-                  </Text>
-                  <View></View>
-                </View>
-                <View style={style.cardDetailRow}>
-                  <Text>Satış Fiyatı</Text>
-                  <View></View>
-                </View>
-                <View style={style.cardDetailRow}>
-                  <Text style={style.carPrice}>{item.price + ' ₺'}</Text>
-                  <View></View>
-                </View>
-                <View style={style.introWrapper}>
-                  <Text style={{ fontSize: 14 }}>{item.intro}</Text>
-                </View>
-                <View style={style.detailButtons}>
-                  <View style={style.innerTexts}>
-                    <Text>{item.kilometers + ' KM'}</Text>
-                  </View>
-                  <View style={style.innerTexts}>
-                    <Text>{item.fuel}</Text>
-                  </View>
-                  <View style={style.innerTexts}>
-                    <Text>{item.gear}</Text>
-                  </View>
-                </View>
-              </View>
-            )}
+            renderItem={Card}
           />
         )}
       </View>
@@ -346,6 +347,7 @@ const style = StyleSheet.create({
   carBrand: {
     fontSize: 17,
     fontWeight: 'bold',
+    textTransform: 'uppercase',
   },
   carPrice: {
     fontSize: 17,

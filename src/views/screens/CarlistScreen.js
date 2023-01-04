@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   StatusBar,
   StyleSheet,
@@ -16,10 +16,10 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 import COLORS from '../../consts/colors';
 import { useNavigation } from '@react-navigation/native';
 
-const {width} = Dimensions.get('screen');
+const { width } = Dimensions.get('screen');
 let column = 0;
 
-const CarlistScreen = ({}) => {
+const CarlistScreen = ({ }) => {
   const navigation = useNavigation();
   const [loading, setLoading] = useState(false);
   const [cars, setCars] = useState([]);
@@ -68,8 +68,8 @@ const CarlistScreen = ({}) => {
   };
   const ListOptions = () => {
     const optionsList = [
-      {title: 'Araç Sat', img: require('../../assets/arac-sat.png')},
-      {title: 'Konsinye Bırak', img: require('../../assets/konsinye.png')},
+      { title: 'Araç Sat', img: require('../../assets/arac-sat.png') },
+      { title: 'Konsinye Bırak', img: require('../../assets/konsinye.png') },
     ];
     return (
       <View style={style.optionListContainer}>
@@ -101,7 +101,7 @@ const CarlistScreen = ({}) => {
         />
       </View>
       <TouchableOpacity onPress={() => navigation.navigate('CarGalleryScreen')}>
-        <View style={{justifyContent: 'space-between', flexDirection: 'row'}}>
+        <View style={{ justifyContent: 'space-between', flexDirection: 'row' }}>
           <View></View>
           <View
             style={{
@@ -137,7 +137,7 @@ const CarlistScreen = ({}) => {
                 justifyContent: 'center',
                 alignItems: 'center',
               }}>
-              <Text style={{color: COLORS.dark, marginBottom: 10}}>
+              <Text style={{ color: COLORS.dark, marginBottom: 10 }}>
                 Araçlar Yükleniyor...
               </Text>
             </View>
@@ -149,18 +149,16 @@ const CarlistScreen = ({}) => {
               paddingVertical: 20,
               paddingBottom: 150,
             }}
-            //showsHorizontalScrollIndicator={false}
-            //horizontal
             data={filteredCars}
             numColumns={column}
             keyExtractor={item => item._id}
-            renderItem={({item, index}) => (
+            renderItem={({ item, index }) => (
               <View style={style.card} key={item._id + 'w'}>
                 {item.images.map(
                   (img, i) =>
                     item.images[i].case === 0 && (
                       <Pressable
-                        key={item._id + 'p'}
+                        key={i}
                         onPress={() =>
                           navigation.navigate('CarDetailScreen', {
                             primaryImage: item.images[i].name,
@@ -182,7 +180,7 @@ const CarlistScreen = ({}) => {
                             itemResponsiblePhone: item.responsiblePhone,
                           })
                         }
-                        style={{width: '40%'}}>
+                        style={{ width: '40%' }}>
                         <Image
                           key={item.images[i].name}
                           resizeMode="contain"
@@ -196,31 +194,29 @@ const CarlistScreen = ({}) => {
                       </Pressable>
                     ),
                 )}
-                <View style={{width: '50%', justifyContent: 'center'}}>
+                <View style={{ width: '50%', justifyContent: 'center' }}>
                   <View
-                    style={{width: '96%', marginLeft: '2%', marginRight: '2%'}}>
-                    <Text style={{fontSize: 12, fontWeight: 'bold'}}>
-                      {item.brand.toUpperCase() +
-                        ' - ' +
-                        item.model.toUpperCase()}
+                    style={{ width: '96%', marginLeft: '2%', marginRight: '2%' }}>
+                    <Text style={{ fontSize: 12, fontWeight: 'bold', textTransform: 'uppercase' }}>
+                      {item.brand + ' - ' + item.model}
                     </Text>
-                    <Text style={{fontSize: 12, fontWeight: 'bold'}}>
+                    <Text style={{ fontSize: 12, fontWeight: 'bold' }}>
                       {item.price + ' ₺'}
                     </Text>
-                    <Text style={{fontSize: 10}}>{item.intro}</Text>
+                    <Text style={{ fontSize: 10 }}>{item.intro}</Text>
                   </View>
                   <View style={style.detailButtons}>
                     <View style={style.innerTexts}>
-                      <Text style={{fontSize:12}}>{item.kilometers + ' KM'}</Text>
+                      <Text style={{ fontSize: 12 }}>{item.kilometers + ' KM'}</Text>
                     </View>
                     <View style={style.innerTexts}>
-                      <Text style={{fontSize:12}}>{item.fuel}</Text>
+                      <Text style={{ fontSize: 12 }}>{item.fuel}</Text>
                     </View>
                     <View style={style.innerTexts}>
-                      <Text style={{fontSize:12}}>{item.gear}</Text>
+                      <Text style={{ fontSize: 12 }}>{item.gear}</Text>
                     </View>
                   </View>
-                </View>                
+                </View>
               </View>
             )}
           />
