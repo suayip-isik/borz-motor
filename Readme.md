@@ -1,5 +1,5 @@
-npx yarn install
-bundle install
-cd ios
-    pod install
-    cd ..
+npx yarn install  
+bundle install  
+cd ios  
+    pod install  
+    cd ..  
