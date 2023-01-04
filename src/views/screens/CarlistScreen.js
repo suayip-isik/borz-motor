@@ -5,8 +5,6 @@ import {
   View,
   Text,
   Image,
-  ScrollView,
-  TextInput,
   Dimensions,
   FlatList,
   ActivityIndicator,
@@ -117,21 +115,6 @@ const CarlistScreen = ({}) => {
           </View>
         </View>
       </TouchableOpacity>
-      {/*
-      <ScrollView>
-        <View style={style.searchWrapper}>
-          <View style={style.searchInput}>
-            <Icon name="search" size={25} color={COLORS.grey} />
-            <TextInput placeholder="Model veya Markaya Göre Ara..." />
-          </View>
-          <View style={style.sortBtn}>
-            <Icon name="tune" color={COLORS.white} size={25} />
-          </View>
-        </View>
-        <ListOptions></ListOptions>
-        <ListCategories></ListCategories>
-      </ScrollView>
-      */}
       <View>
         {loading ? (
           <View style={style.detailContainer}>
