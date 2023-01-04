@@ -5,8 +5,6 @@ import {
   View,
   Text,
   Image,
-  ScrollView,
-  TextInput,
   Dimensions,
   FlatList,
   ActivityIndicator,
@@ -16,7 +14,7 @@ import {
 } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import COLORS from '../../consts/colors';
-import { NavigationContainer, useNavigation } from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native';
 
 const { width } = Dimensions.get('screen');
 let column = 0;
@@ -117,21 +115,6 @@ const CarGalleryScreen = ({ }) => {
           </View>
         </View>
       </TouchableOpacity>
-      {/*
-      <ScrollView>
-        <View style={style.searchWrapper}>
-          <View style={style.searchInput}>
-            <Icon name="search" size={25} color={COLORS.grey} />
-            <TextInput placeholder="Model veya Markaya Göre Ara..." />
-          </View>
-          <View style={style.sortBtn}>
-            <Icon name="tune" color={COLORS.white} size={25} />
-          </View>
-        </View>
-        <ListOptions></ListOptions>
-        <ListCategories></ListCategories>
-      </ScrollView>
-      */}
       <View>
         {loading ? (
           <View style={style.detailContainer}>
@@ -166,8 +149,6 @@ const CarGalleryScreen = ({ }) => {
               paddingVertical: 20,
               paddingBottom: 150,
             }}
-            //showsHorizontalScrollIndicator={false}
-            //horizontal
             data={filteredCars}
             numColumns={column}
             keyExtractor={item => item._id}

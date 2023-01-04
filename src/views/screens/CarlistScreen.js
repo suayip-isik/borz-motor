@@ -11,13 +11,12 @@ import {
   FlatList,
   ActivityIndicator,
   TouchableOpacity,
+  Pressable,
+  SafeAreaView,
 } from 'react-native';
-import SafeAreaView from 'react-native-safe-area-view';
 import Icon from 'react-native-vector-icons/MaterialIcons';
-import Pressable from 'react-native/Libraries/Components/Pressable/Pressable';
 import COLORS from '../../consts/colors';
-import {NavigationContainer, useNavigation} from '@react-navigation/native';
-// import {TouchableOpacity} from 'react-native-gesture-handler';
+import { useNavigation } from '@react-navigation/native';
 
 const {width} = Dimensions.get('screen');
 let column = 0;
