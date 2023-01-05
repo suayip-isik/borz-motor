@@ -1,24 +1,19 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   StyleSheet,
-  FlatList,
   Image,
   StatusBar,
   Text,
-  Modal,
-  Animated,
-  TextInput,
   TouchableOpacity,
   ScrollView,
   Linking,
   ActivityIndicator,
   Dimensions,
-  ImageBackground,
   View,
+  SafeAreaView,
 } from 'react-native';
-import SafeAreaView from 'react-native-safe-area-view';
 import COLORS from '../../consts/colors';
-import {SliderBox} from 'react-native-image-slider-box';
+import { SliderBox } from 'react-native-image-slider-box';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import {
   NavigationContainer,
@@ -26,10 +21,9 @@ import {
   useRoute,
 } from '@react-navigation/native';
 
-//const deviceWidth = Dimensions.get('window').width;
-const {width} = Dimensions.get('screen');
+const { width } = Dimensions.get('screen');
 
-const CarDetailScreen = ({}) => {
+const CarDetailScreen = ({ }) => {
   const navigation = useNavigation();
   const route = useRoute();
   const {
@@ -67,7 +61,7 @@ const CarDetailScreen = ({}) => {
       .then(response => setCar(response));
 
     startLoading();
-  }, []);  
+  }, []);
 
   const gallery = [];
 
@@ -166,7 +160,6 @@ const CarDetailScreen = ({}) => {
       }),
   );
 
-  //console.log(JSON.stringify(gallery));
 
   return (
     <SafeAreaView style={style.safe}>
@@ -185,22 +178,7 @@ const CarDetailScreen = ({}) => {
           style={style.borzlogo}
         />
       </View>
-      {/*
-      <View style={style.searchWrapper}>
-        <View style={style.searchInput}>
-          <Icon name="search" size={25} color={COLORS.grey} />
-          <TextInput placeholder="Model veya Markaya Göre Ara..." />
-        </View>
-        <View style={style.sortBtn}>
-          <Icon name="tune" color={COLORS.white} size={25} />
-        </View>
-      </View>
-      */}
       <ScrollView>
-        {/*
-        <ListOptions></ListOptions>
-        <ListCategories></ListCategories>        
-        */}
         <View style={style.listContainer}>
           {loading ? (
             <View
@@ -229,7 +207,7 @@ const CarDetailScreen = ({}) => {
                   justifyContent: 'center',
                   alignItems: 'center',
                 }}>
-                <Text style={{color: COLORS.dark, marginBottom: 10}}>
+                <Text style={{ color: COLORS.dark, marginBottom: 10 }}>
                   Resimler Yükleniyor...
                 </Text>
               </View>
@@ -280,14 +258,14 @@ const CarDetailScreen = ({}) => {
           )}
           <View style={style.virtualTag}>
             <Text style={style.virtualtext}>
-              {itemBrand.toUpperCase() + ' - ' + itemModel.toUpperCase()}
+              {itemBrand + ' - ' + itemModel}
             </Text>
           </View>
         </View>
-        <View style={{alignItems: 'center'}}>
-          <Text style={{color: COLORS.dark}}>ÖZELLİKLER</Text>
+        <View style={{ alignItems: 'center' }}>
+          <Text style={{ color: COLORS.dark }}>ÖZELLİKLER</Text>
         </View>
-        <View style={{alignItems: 'center'}}></View>
+        <View style={{ alignItems: 'center' }}></View>
         <View style={style.carDetailContainer}>
           <View style={style.cardDetailRow}>
             <Text style={style.carBrand}></Text>
@@ -295,35 +273,35 @@ const CarDetailScreen = ({}) => {
           </View>
           <View style={style.cardDetailRow}>
             <Text style={style.detailText}>Marka:</Text>
-            <Text style={style.detailText}>{itemBrand.toUpperCase()}</Text>
+            <Text style={style.detailText}>{itemBrand}</Text>
           </View>
           <View style={style.cardDetailRow}>
             <Text style={style.detailText}>Model:</Text>
-            <Text style={style.detailText}>{itemModel.toUpperCase()}</Text>
+            <Text style={style.detailText}>{itemModel}</Text>
           </View>
           <View style={style.cardDetailRow}>
             <Text style={style.detailText}>Araç Paketi:</Text>
-            <Text style={style.detailText}>{itemBox.toUpperCase()}</Text>
+            <Text style={style.detailText}>{itemBox}</Text>
           </View>
           <View style={style.cardDetailRow}>
             <Text style={style.detailText}>Motor:</Text>
-            <Text style={style.detailText}>{itemMotor.toUpperCase()}</Text>
+            <Text style={style.detailText}>{itemMotor}</Text>
           </View>
           <View style={style.cardDetailRow}>
             <Text style={style.detailText}>YIL:</Text>
-            <Text style={style.detailText}>{itemYear.toUpperCase()}</Text>
+            <Text style={style.detailText}>{itemYear}</Text>
           </View>
           <View style={style.cardDetailRow}>
             <Text style={style.detailText}>Vites:</Text>
-            <Text style={style.detailText}>{itemGear.toUpperCase()}</Text>
+            <Text style={style.detailText}>{itemGear}</Text>
           </View>
           <View style={style.cardDetailRow}>
             <Text style={style.detailText}>Yakıt:</Text>
-            <Text style={style.detailText}>{itemFuel.toUpperCase()}</Text>
+            <Text style={style.detailText}>{itemFuel}</Text>
           </View>
           <View style={style.cardDetailRow}>
             <Text style={style.detailText}>Kilometre:</Text>
-            <Text style={style.detailText}>{itemKM.toUpperCase()}</Text>
+            <Text style={style.detailText}>{itemKM}</Text>
           </View>
           <View style={style.cardDetailRow}>
             <Text style={style.detailText}>Adres:</Text>
@@ -331,13 +309,13 @@ const CarDetailScreen = ({}) => {
           </View>
           <View style={style.cardDetailRow}>
             <Text style={style.detailText}>Sorumlu Kişi:</Text>
-            <View style={{flexDirection: 'row', justifyContent: 'center'}}>
+            <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
               <Icon name="person" size={17} />
               <Text style={style.detailText}>BorzMotor</Text>
             </View>
           </View>
-          <View style={{alignItems: 'center', justifyContent: 'center'}}>
-            <TouchableOpacity onPress={()=> Linking.openURL('tel:${+905322058058}')}>
+          <View style={{ alignItems: 'center', justifyContent: 'center' }}>
+            <TouchableOpacity onPress={() => Linking.openURL('tel:${+905322058058}')}>
               <View
                 style={{
                   marginTop: 10,
@@ -359,14 +337,11 @@ const CarDetailScreen = ({}) => {
           <View style={style.cardDetailRow}>
             <Text style={style.detailText}>Tramer:</Text>
             <Text style={style.detailText}>
-              {itemTramer.toUpperCase() + ' ₺'}
+              {itemTramer + ' ₺'}
             </Text>
           </View>
         </View>
       </ScrollView>
-      {/*
-      <Image style={style.thumb} source={{uri:"https://raw.githubusercontent.com/filippofilip95/car-logos-dataset/master/logos/thumb/"+filteredCars[0].brand+".png"}} />
-      */}
     </SafeAreaView>
   );
 };
@@ -546,6 +521,7 @@ const style = StyleSheet.create({
   },
   virtualtext: {
     color: COLORS.white,
+    textTransform: 'uppercase',
   },
   onloadText: {
     color: COLORS.dark,
@@ -593,6 +569,7 @@ const style = StyleSheet.create({
     fontSize: 14,
     fontWeight: 'bold',
     color: COLORS.dark,
+    textTransform: 'uppercase',
   },
   listContainer: {
     width: '100%',
