@@ -15,6 +15,7 @@ import {
   useNavigation,
   useRoute,
 } from '@react-navigation/native';
+import { ImageSlider } from "react-native-image-slider-banner";
 
 const { width } = Dimensions.get('screen');
 
@@ -64,14 +65,14 @@ const CarDetailScreen = ({ }) => {
 
   const setImagesLink = (itemId) => {
     images.map((img, i) => {
-      setGallery(oldArray => [...oldArray, "https://test.borzmotor.com/" + img.name.toString()])
+      setGallery(oldArray => [...oldArray, { "img": "https://test.borzmotor.com/" + img.name.toString() }])
     })
   }
 
   useEffect(() => {
 
     console.log("--");
-    console.log(gallery);
+    console.log("galeri: ", gallery);
     console.log("--");
 
   }, [gallery])
@@ -95,8 +96,14 @@ const CarDetailScreen = ({ }) => {
         />
       </View>
       {
-        gallery.map((link, i) => <Image key={i} style={{ width: 200, height: 200, resizeMode: 'contain' }} source={{ uri: link }} />)
+        // gallery.map((link, i) => <Image key={i} style={{ width: 200, height: 200, resizeMode: 'contain' }} source={{ uri: link }} />)
       }
+      <ImageSlider
+        data={gallery}
+        autoPlay={false}
+        onItemChanged={(item) => console.log("item", item)}
+        closeIconColor="#fff"
+      />
     </SafeAreaView>
   );
 };
