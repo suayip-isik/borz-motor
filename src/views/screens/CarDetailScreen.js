@@ -7,6 +7,9 @@ import {
   Dimensions,
   View,
   SafeAreaView,
+  TouchableOpacity,
+  ScrollView,
+  Linking
 } from 'react-native';
 import COLORS from '../../consts/colors';
 import Icon from 'react-native-vector-icons/MaterialIcons';
@@ -95,15 +98,94 @@ const CarDetailScreen = ({ }) => {
           style={style.borzlogo}
         />
       </View>
-      {
-        // gallery.map((link, i) => <Image key={i} style={{ width: 200, height: 200, resizeMode: 'contain' }} source={{ uri: link }} />)
-      }
-      <ImageSlider
-        data={gallery}
-        autoPlay={false}
-        onItemChanged={(item) => console.log("item", item)}
-        closeIconColor="#fff"
-      />
+      <ScrollView>
+        <ImageSlider
+          data={gallery}
+          autoPlay={false}
+          onItemChanged={(item) => console.log("item", item)}
+          closeIconColor="#fff"
+        />
+
+        <View style={{ alignItems: 'center' }}>
+          <Text style={{ color: COLORS.dark }}>ÖZELLİKLER</Text>
+        </View>
+        <View style={{ alignItems: 'center' }}></View>
+        <View style={style.carDetailContainer}>
+          <View style={style.cardDetailRow}>
+            <Text style={style.carBrand}></Text>
+            <Text style={style.carPrice}>{itemPrice + ' ₺'}</Text>
+          </View>
+          <View style={style.cardDetailRow}>
+            <Text style={style.detailText}>Marka:</Text>
+            <Text style={style.detailText}>{itemBrand}</Text>
+          </View>
+          <View style={style.cardDetailRow}>
+            <Text style={style.detailText}>Model:</Text>
+            <Text style={style.detailText}>{itemModel}</Text>
+          </View>
+          <View style={style.cardDetailRow}>
+            <Text style={style.detailText}>Araç Paketi:</Text>
+            <Text style={style.detailText}>{itemBox}</Text>
+          </View>
+          <View style={style.cardDetailRow}>
+            <Text style={style.detailText}>Motor:</Text>
+            <Text style={style.detailText}>{itemMotor}</Text>
+          </View>
+          <View style={style.cardDetailRow}>
+            <Text style={style.detailText}>YIL:</Text>
+            <Text style={style.detailText}>{itemYear}</Text>
+          </View>
+          <View style={style.cardDetailRow}>
+            <Text style={style.detailText}>Vites:</Text>
+            <Text style={style.detailText}>{itemGear}</Text>
+          </View>
+          <View style={style.cardDetailRow}>
+            <Text style={style.detailText}>Yakıt:</Text>
+            <Text style={style.detailText}>{itemFuel}</Text>
+          </View>
+          <View style={style.cardDetailRow}>
+            <Text style={style.detailText}>Kilometre:</Text>
+            <Text style={style.detailText}>{itemKM}</Text>
+          </View>
+          <View style={style.cardDetailRow}>
+            <Text style={style.detailText}>Adres:</Text>
+            <Text style={style.detailText}>{'İstanbul/Bahçelievler'}</Text>
+          </View>
+          <View style={style.cardDetailRow}>
+            <Text style={style.detailText}>Sorumlu Kişi:</Text>
+            <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
+              <Icon name="person" size={17} />
+              <Text style={style.detailText}>BorzMotor</Text>
+            </View>
+          </View>
+          <View style={{ alignItems: 'center', justifyContent: 'center' }}>
+            <TouchableOpacity onPress={() => Linking.openURL('tel:${+905322058058}')}>
+              <View
+                style={{
+                  marginTop: 10,
+                  width: '80%',
+                  backgroundColor: '#019267',
+                  paddingHorizontal: 10,
+                  height: 40,
+                  borderRadius: 10,
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                }}>
+                <Text style={style.virtualtext}>0532 205 80 58</Text>
+                <Icon name="phone-enabled" color={COLORS.white} size={20} />
+              </View>
+            </TouchableOpacity>
+          </View>
+        </View>
+        <View style={style.carDetailContainer}>
+          <View style={style.cardDetailRow}>
+            <Text style={style.detailText}>Tramer:</Text>
+            <Text style={style.detailText}>
+              {itemTramer + ' ₺'}
+            </Text>
+          </View>
+        </View>
+      </ScrollView>
     </SafeAreaView>
   );
 };
