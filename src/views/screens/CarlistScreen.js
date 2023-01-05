@@ -178,6 +178,7 @@ const CarlistScreen = ({ }) => {
                             itemTramer: item.tramer,
                             itemResponsible: item.responsible,
                             itemResponsiblePhone: item.responsiblePhone,
+                            images: item.images
                           })
                         }
                         style={{ width: '40%' }}>
