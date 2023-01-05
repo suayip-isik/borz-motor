@@ -42,7 +42,6 @@ const CarGalleryScreen = ({ }) => {
   const filteredCars = cars.filter(x => x.published);
 
   const Card = ({ item, index }) => {
-    console.log(item._id);
     return (
       <View style={style.card} key={item._id + 'w'}>
         {item.images.map(
