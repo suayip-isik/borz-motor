@@ -68,6 +68,7 @@ const CarGalleryScreen = ({ }) => {
                     itemTramer: item.tramer,
                     itemResponsible: item.responsible,
                     itemResponsiblePhone: item.responsiblePhone,
+                    images: item.images
                   })
                 }>
                 <Image

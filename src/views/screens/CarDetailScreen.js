@@ -4,16 +4,11 @@ import {
   Image,
   StatusBar,
   Text,
-  TouchableOpacity,
-  ScrollView,
-  Linking,
-  ActivityIndicator,
   Dimensions,
   View,
   SafeAreaView,
 } from 'react-native';
 import COLORS from '../../consts/colors';
-import { SliderBox } from 'react-native-image-slider-box';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import {
   NavigationContainer,
@@ -44,6 +39,7 @@ const CarDetailScreen = ({ }) => {
     itemTramer,
     itemResponsible,
     itemResponsiblePhone,
+    images,
   } = route.params;
   const [car, setCar] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -56,109 +52,29 @@ const CarDetailScreen = ({ }) => {
   };
 
   useEffect(() => {
-    fetch('https://test.borzmotor.com/api/justShowSell/vehicle-all')
-      .then(response => response.json())
-      .then(response => setCar(response));
+    console.log("item id: ", itemId);
+    console.log("")
+    console.log("images: ", images)
 
     startLoading();
+    setImagesLink();
   }, []);
 
-  const gallery = [];
+  const [gallery, setGallery] = useState([])
 
-  const logoList = [
-    {
-      brand: 'renault',
-      logo: 'https://raw.githubusercontent.com/filippofilip95/car-logos-dataset/master/logos/thumb/renault.png',
-    },
-    {
-      brand: 'citroen',
-      logo: 'https://raw.githubusercontent.com/filippofilip95/car-logos-dataset/master/logos/thumb/citroen.png',
-    },
-    {
-      brand: 'fiat',
-      logo: 'https://raw.githubusercontent.com/filippofilip95/car-logos-dataset/master/logos/thumb/fiat.png',
-    },
-    {
-      brand: 'opel',
-      logo: 'https://raw.githubusercontent.com/filippofilip95/car-logos-dataset/master/logos/thumb/opel.png',
-    },
-    {
-      brand: 'hyundai',
-      logo: 'https://raw.githubusercontent.com/filippofilip95/car-logos-dataset/master/logos/thumb/hyundai.png',
-    },
-    {
-      brand: 'ds auto',
-      logo: 'https://raw.githubusercontent.com/filippofilip95/car-logos-dataset/master/logos/thumb/ds.png',
-    },
-    {
-      brand: 'ford',
-      logo: 'https://raw.githubusercontent.com/filippofilip95/car-logos-dataset/master/logos/thumb/ford.png',
-    },
-    {
-      brand: 'mini',
-      logo: 'https://raw.githubusercontent.com/filippofilip95/car-logos-dataset/master/logos/thumb/mini.png',
-    },
-    {
-      brand: 'skoda',
-      logo: 'https://raw.githubusercontent.com/filippofilip95/car-logos-dataset/master/logos/thumb/skoda.png',
-    },
-    {
-      brand: 'kia',
-      logo: 'https://raw.githubusercontent.com/filippofilip95/car-logos-dataset/master/logos/thumb/kia.png',
-    },
-    {
-      brand: 'toyota',
-      logo: 'https://raw.githubusercontent.com/filippofilip95/car-logos-dataset/master/logos/thumb/toyota.png',
-    },
-    {
-      brand: 'volkswagen',
-      logo: 'https://raw.githubusercontent.com/filippofilip95/car-logos-dataset/master/logos/thumb/volkswagen.png',
-    },
-    {
-      brand: 'harley davidson',
-      logo: 'https://raw.githubusercontent.com/filippofilip95/car-logos-dataset/master/logos/thumb/audi.png',
-    },
-    {
-      brand: 'audi',
-      logo: 'https://raw.githubusercontent.com/filippofilip95/car-logos-dataset/master/logos/thumb/audi.png',
-    },
-    {
-      brand: 'land rover',
-      logo: 'https://raw.githubusercontent.com/filippofilip95/car-logos-dataset/master/logos/thumb/land-rover.png',
-    },
-    {
-      brand: 'honda',
-      logo: 'https://raw.githubusercontent.com/filippofilip95/car-logos-dataset/master/logos/thumb/honda.png',
-    },
-    {
-      brand: 'dodge',
-      logo: 'https://raw.githubusercontent.com/filippofilip95/car-logos-dataset/master/logos/thumb/dodge.png',
-    },
-    {
-      brand: 'seat',
-      logo: 'https://raw.githubusercontent.com/filippofilip95/car-logos-dataset/master/logos/thumb/seat.png',
-    },
-    {
-      brand: 'peugeot',
-      logo: 'https://raw.githubusercontent.com/filippofilip95/car-logos-dataset/master/logos/thumb/peugeot.png',
-    },
-    {
-      brand: 'nissan',
-      logo: 'https://raw.githubusercontent.com/filippofilip95/car-logos-dataset/master/logos/thumb/nissan.png',
-    },
-    {
-      brand: 'bmw',
-      logo: 'https://raw.githubusercontent.com/filippofilip95/car-logos-dataset/master/logos/thumb/bmw.png',
-    },
-  ];
+  const setImagesLink = (itemId) => {
+    images.map((img, i) => {
+      setGallery(oldArray => [...oldArray, "https://test.borzmotor.com/" + img.name.toString()])
+    })
+  }
 
-  const filteredCars = car.filter(
-    x =>
-      x._id === itemId &&
-      x.images.map((img, i) => {
-        gallery.push('https://test.borzmotor.com/' + x.images[i].name);
-      }),
-  );
+  useEffect(() => {
+
+    console.log("--");
+    console.log(gallery);
+    console.log("--");
+
+  }, [gallery])
 
 
   return (
@@ -178,170 +94,9 @@ const CarDetailScreen = ({ }) => {
           style={style.borzlogo}
         />
       </View>
-      <ScrollView>
-        <View style={style.listContainer}>
-          {loading ? (
-            <View
-              style={{
-                marginTop: 5,
-                marginBottom: 45,
-                alignItems: 'center',
-                height: 50,
-              }}>
-              <ActivityIndicator
-                visible={loading}
-                size={50}
-                color={COLORS.red}
-                animating
-                textContent={'Resimler Yükleniyor...'}
-              />
-              <View
-                style={{
-                  width: '80%',
-                  backgroundColor: COLORS.white,
-                  paddingHorizontal: 20,
-                  height: 40,
-                  borderRadius: 10,
-                  borderWidth: 2,
-                  borderColor: COLORS.dark,
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                }}>
-                <Text style={{ color: COLORS.dark, marginBottom: 10 }}>
-                  Resimler Yükleniyor...
-                </Text>
-              </View>
-            </View>
-          ) : (
-            <SliderBox
-              images={gallery}
-              sliderBoxHeight={250}
-              parentWitdh={'100%'}
-              onCurrentImagePressed={index =>
-                navigation.navigate('ImageScreen', {
-                  selectedImage: gallery[index],
-                })
-              }
-              dotColor="#FFEE58"
-              inactiveDotColor={COLORS.white}
-              paginationBoxVerticalPadding={20}
-              autoplay
-              autoplayInterval={5000}
-              circleLoop
-              resizeMethod={'resize'}
-              resizeMode={'contain'}
-              paginationBoxStyle={{
-                position: 'absolute',
-                bottom: 0,
-                padding: 0,
-                alignItems: 'center',
-                alignSelf: 'center',
-                justifyContent: 'center',
-                paddingVertical: 10,
-              }}
-              dotStyle={{
-                width: 4,
-                height: 4,
-                borderRadius: 5,
-                marginHorizontal: 0,
-                padding: 0,
-                margin: 0,
-                backgroundColor: 'rgba(128, 128, 128, 0.92)',
-              }}
-              ImageComponentStyle={{
-                borderRadius: 15,
-                width: '97%',
-                marginTop: 5,
-              }}
-              imageLoadingColor="#2196F3"
-            />
-          )}
-          <View style={style.virtualTag}>
-            <Text style={style.virtualtext}>
-              {itemBrand + ' - ' + itemModel}
-            </Text>
-          </View>
-        </View>
-        <View style={{ alignItems: 'center' }}>
-          <Text style={{ color: COLORS.dark }}>ÖZELLİKLER</Text>
-        </View>
-        <View style={{ alignItems: 'center' }}></View>
-        <View style={style.carDetailContainer}>
-          <View style={style.cardDetailRow}>
-            <Text style={style.carBrand}></Text>
-            <Text style={style.carPrice}>{itemPrice + ' ₺'}</Text>
-          </View>
-          <View style={style.cardDetailRow}>
-            <Text style={style.detailText}>Marka:</Text>
-            <Text style={style.detailText}>{itemBrand}</Text>
-          </View>
-          <View style={style.cardDetailRow}>
-            <Text style={style.detailText}>Model:</Text>
-            <Text style={style.detailText}>{itemModel}</Text>
-          </View>
-          <View style={style.cardDetailRow}>
-            <Text style={style.detailText}>Araç Paketi:</Text>
-            <Text style={style.detailText}>{itemBox}</Text>
-          </View>
-          <View style={style.cardDetailRow}>
-            <Text style={style.detailText}>Motor:</Text>
-            <Text style={style.detailText}>{itemMotor}</Text>
-          </View>
-          <View style={style.cardDetailRow}>
-            <Text style={style.detailText}>YIL:</Text>
-            <Text style={style.detailText}>{itemYear}</Text>
-          </View>
-          <View style={style.cardDetailRow}>
-            <Text style={style.detailText}>Vites:</Text>
-            <Text style={style.detailText}>{itemGear}</Text>
-          </View>
-          <View style={style.cardDetailRow}>
-            <Text style={style.detailText}>Yakıt:</Text>
-            <Text style={style.detailText}>{itemFuel}</Text>
-          </View>
-          <View style={style.cardDetailRow}>
-            <Text style={style.detailText}>Kilometre:</Text>
-            <Text style={style.detailText}>{itemKM}</Text>
-          </View>
-          <View style={style.cardDetailRow}>
-            <Text style={style.detailText}>Adres:</Text>
-            <Text style={style.detailText}>{'İstanbul/Bahçelievler'}</Text>
-          </View>
-          <View style={style.cardDetailRow}>
-            <Text style={style.detailText}>Sorumlu Kişi:</Text>
-            <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
-              <Icon name="person" size={17} />
-              <Text style={style.detailText}>BorzMotor</Text>
-            </View>
-          </View>
-          <View style={{ alignItems: 'center', justifyContent: 'center' }}>
-            <TouchableOpacity onPress={() => Linking.openURL('tel:${+905322058058}')}>
-              <View
-                style={{
-                  marginTop: 10,
-                  width: '80%',
-                  backgroundColor: '#019267',
-                  paddingHorizontal: 10,
-                  height: 40,
-                  borderRadius: 10,
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                }}>
-                <Text style={style.virtualtext}>0532 205 80 58</Text>
-                <Icon name="phone-enabled" color={COLORS.white} size={20} />
-              </View>
-            </TouchableOpacity>
-          </View>
-        </View>
-        <View style={style.carDetailContainer}>
-          <View style={style.cardDetailRow}>
-            <Text style={style.detailText}>Tramer:</Text>
-            <Text style={style.detailText}>
-              {itemTramer + ' ₺'}
-            </Text>
-          </View>
-        </View>
-      </ScrollView>
+      {
+        gallery.map((link, i) => <Image key={i} style={{ width: 200, height: 200, resizeMode: 'contain' }} source={{ uri: link }} />)
+      }
     </SafeAreaView>
   );
 };
