@@ -104,19 +104,6 @@ const CarDetailScreen = ({ }) => {
           autoPlay={false}
           onItemChanged={(item) => console.log("item", item)}
           closeIconColor="#fff"
-          // previewImageContainerStyle={{width: 50, height: 50}}
-          // showIndicator={false}
-          // showHeader={true}
-          // headerStyle={{padding: 50}}
-          // headerCenterComponent={()=><Text>sss</Text>}
-          // previewImageContainerStyle={{ backgroundColor: 'red' }}
-          // preview={false}
-          // previewImageStyle={{flex: 1}}
-          // caroselImageContainerStyle={{width: '80%'}}
-          // caroselImageStyle={{}}
-          // indicatorContainerStyle={{}}
-          // activeIndicatorStyle={{opacity: 1}}
-          // inActiveIndicatorStyle={{ opacity: 0 }}
         />
 
         <View style={{ alignItems: 'center' }}>
